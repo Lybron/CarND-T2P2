@@ -28,6 +28,9 @@ public:
   ///* state covariance matrix
   MatrixXd P_;
 
+  ///* augmented sigma points
+  MatrixXd Xsig_aug;
+
   ///* predicted sigma points matrix
   MatrixXd Xsig_pred_;
 
@@ -64,9 +67,14 @@ public:
   ///* Augmented state dimension
   int n_aug_;
 
+  // Radar measurement dimension
+  int n_rdr_;
+
   ///* Sigma point spreading parameter
   double lambda_;
 
+  // previous timestamp
+  long long previous_t;
 
   /**
    * Constructor

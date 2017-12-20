@@ -1,4 +1,3 @@
-#ifndef UKF_H
 #define UKF_H
 
 #include "measurement_package.h"
@@ -6,6 +5,7 @@
 #include <vector>
 #include <string>
 #include <fstream>
+#include "tools.h"
 
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
@@ -25,17 +25,8 @@ public:
   ///* state vector: [pos1 pos2 vel_abs yaw_angle yaw_rate] in SI units and rad
   VectorXd x_;
 
-  //* augmented state vector
-  VectorXd x_aug;
-
   ///* state covariance matrix
   MatrixXd P_;
-
-  ///* augmented state covariance matrix
-  MatrixXd P_aug;
-
-  ///* augmented sigma points
-  MatrixXd Xsig_aug;
 
   ///* predicted sigma points matrix
   MatrixXd Xsig_pred_;
@@ -73,17 +64,14 @@ public:
   ///* Augmented state dimension
   int n_aug_;
 
-  // Radar measurement dimension
-  int n_rdr_;
+  ///* radar state measurement
+  int n_radar_;
 
-  // Laser measurement dimension
-  int n_lsr_;
+  ///* laser state measurement
+  int n_laser_;
 
   ///* Sigma point spreading parameter
   double lambda_;
-
-  // previous timestamp
-  long long previous_timestamp;
 
   /**
    * Constructor
@@ -120,5 +108,3 @@ public:
    */
   void UpdateRadar(MeasurementPackage meas_package);
 };
-
-#endif /* UKF_H */
